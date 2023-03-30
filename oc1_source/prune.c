@@ -247,7 +247,7 @@ compute_alpha(node)
   double ncost,scost;
   double node_cost(),subtree_cost();
   
-  if (node == NULL) return;
+  if (node == NULL) return 0;
   
   ncost = node_cost(node); 
   scost = subtree_cost(node);
@@ -395,7 +395,7 @@ cut_subtrees(cur_node,alpha_threshold)
      struct tree_node *cur_node;
      double alpha_threshold;
 {
-  if (cur_node == NULL) return;
+  if (cur_node == NULL) return 0;
   
   if (cur_node->alpha == alpha_threshold && cur_node->parent != NULL)
     {
@@ -405,7 +405,7 @@ cut_subtrees(cur_node,alpha_threshold)
 	cur_node->parent->right = NULL;
 
       /* deallocate_tree(cur_node);*/ 
-      return;
+      return 0;
     }
 
   cur_node->alpha = 0; /*alpha has to be calculated afresh after every 
@@ -431,7 +431,7 @@ cut_subtrees(cur_node,alpha_threshold)
 deallocate_tree(root)
      struct tree_node *root;
 {
-  if (root == NULL) return;
+  if (root == NULL) return 0;
   deallocate_tree(root->left);
   deallocate_tree(root->right);
   
